@@ -6,24 +6,23 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isFormValid, setIsFormValid] = useState(false);
+  
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
-    validateForm(e.target.value, password);
+    
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    validateForm(username, e.target.value);
+   
   };
 
-  const validateForm = (username, password) => {
-    setIsFormValid(username !== '' && password !== '');
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (username === '' || password === '') {
       setMessage('Username and Password cannot be empty');
     } else if (username === 'user' && password === 'password') {
