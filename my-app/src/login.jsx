@@ -6,25 +6,30 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
-    
+    validateForm(e.target.value, password);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-   
+    validateForm(username, e.target.value);
   };
 
-  
+  const validateForm = (username, password) => {
+    setIsFormValid(username !== '' && password !== '');
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (username === '' || password === '') {
+    if (username === '' && password === '') {
       setMessage('Username and Password cannot be empty');
+    } else if (username === '') {
+      setMessage('Username cannot be empty');
+    } else if (password === '') {
+      setMessage('Password cannot be empty');
     } else if (username === 'user' && password === 'password') {
       setIsLoggedIn(true);
       setMessage('Welcome, user!');
@@ -40,7 +45,7 @@ const Login = () => {
         <div >{message}</div>
       ) : (
         <form  onSubmit={handleSubmit}>
-          <div><label htmlFor="username">Username</label>
+          <div><label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
@@ -50,7 +55,7 @@ const Login = () => {
             required
           /></div>
 
-          <div><label htmlFor="password">Password</label>
+          <div><label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -60,7 +65,7 @@ const Login = () => {
             required
           /></div>
 
-          <button type="submit" disabled={!isFormValid}>
+          <button type="submit" >
             Submit
           </button>
 
