@@ -24,7 +24,9 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (username === 'user' && password === 'password') {
+    if (username === '' || password === '') {
+      setMessage('Username and Password cannot be empty');
+    } else if (username === 'user' && password === 'password') {
       setIsLoggedIn(true);
       setMessage('Welcome, user!');
     } else {
